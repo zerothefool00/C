@@ -1,24 +1,3 @@
-//505page 스트림
-//내가 작성한 프로그램과 컴퓨터내 파일들간의 연결
-
-#include <stdio.h>
-
-int main(void)
-{
-	FILE * fp = fopen("data.txt", "wt");
-	if (fp == NULL)
-	{
-		puts("파일오픈 실패!");
-		return -1;		//비정상적 종료를 의미하기 위해서 -1을 반환
-	}
-
-	fputc('A', fp);
-	fputc('A', fp);
-	fputc('A', fp);
-	fclose(fp);		// 스트림의 종료
-	return 0;
-}
-
 /*
 #include <stdio.h>
 
@@ -279,7 +258,12 @@ int main(void)
 				break;
 			}
 		}
-	}return 0;
+		fwrite((void*)buf, 1, sizeof(buf), des);
+
+	}
+	fclose(src);
+	fclose(des);
+	return 0;
 }
 */
 		/*
@@ -387,3 +371,110 @@ int main(void)
 }
 
 */
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	//파일 생성//
+	FILE * fp = fopen("text.txt", "wt");
+	fputs("123456789", fp);
+	fclose(fp);
+
+	//파일개방//
+	fp = fopen("text.txt", "rt");
+
+	//SEEK_END test//
+	fseek(fp, -2, SEEK_END);
+	putchar(fgetc(fp));
+
+	//SEEK_SET test//
+	fseek(fp, 2, SEEK_SET);
+	putchar(fgetc(fp));
+
+	//SEEK_CUR test//
+	fseek(fp, 2, SEEK_CUR);
+	putchar(fgetc(fp));
+
+	return 0;
+}
+*/
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	//파일 생성//
+	FILE * fp = fopen("text.txt", "wt");
+	fputs("123456789", fp);
+	fclose(fp);
+
+	//파일개방//
+	fp = fopen("text.txt", "rt");
+
+	//SEEK_END test//
+	fseek(fp, -5, SEEK_END);
+	putchar(fgetc(fp));
+
+	//SEEK_SET test//
+	fseek(fp, 3, SEEK_SET);
+	putchar(fgetc(fp));
+
+	//SEEK_CUR test//
+	fseek(fp, 3, SEEK_CUR);
+	putchar(fgetc(fp));
+
+	return 0;
+}
+*/
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	long fpos;
+	int i;
+
+	//파일생성//
+
+	FILE*fp = fopen("text.txt", "wt");
+	fputs("1234-", fp);
+	fclose(fp);
+
+	//파일 개방//
+	fp = fopen("text.txt", "rt");
+
+	for (i = 0; i < 4; ++i)
+	{
+		putchar(fgetc(fp));
+		fpos = ftell(fp);
+		fseek(fp, -1, SEEK_END);
+		putchar(fgetc(fp));
+		fseek(fp, fpos, SEEK_SET);
+	}
+	fclose(fp);
+	return 0;
+}
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(void)
+{
+	int*ptr1 = (int*)malloc(sizeof(int));
+	int*ptr2 = (int*)malloc(sizeof(int) * 7);
+	int i;
+
+	*ptr1 = 20;
+	for (i = 0; i < 7; i++)
+		ptr2[i] = i + 1;
+
+	printf("%d \n", *ptr1);
+	for (i = 0; i < 7; i++)
+		printf("%d ", ptr2[i]);
+
+	free(ptr1);
+	free(ptr2);
+	return 0;
+}
