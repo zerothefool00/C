@@ -18,3 +18,372 @@ int main(void)
 	fclose(fp);		// 스트림의 종료
 	return 0;
 }
+
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	FILE * fp = fopen("data.txt", "wt");
+	if (fp == NULL)
+	{
+		puts("파일오픈 실패!");
+		return -1;		//비정상적 종료를 의미하기 위해서 -1을 반환
+	}
+
+	fputc('A', fp);
+	fputc('B', fp);
+	fputc('C', fp);
+	fclose(fp);		// 스트림의 종료
+	return 0;
+}
+*/
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	int ch;
+	int i;
+	FILE * fp = fopen("data.txt", "rt");
+	if (fp == NULL) {
+		puts("파일오픈 실패!");
+		return -1;
+	}
+
+	for (i = 0; i < 3; i++)
+	{
+		ch = fgetc(fp);
+		printf("%c \n", ch);
+	}
+	fclose(fp);
+	printf("test r: \r");
+	return 0;
+}
+*/
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	FILE * fp = fopen("simple.txt", "wt");
+	if (fp == NULL){
+		puts("파일오픈 실패!");
+		return -1;
+	}
+	fputc('A', fp);
+	fputc('B', fp);
+	fputs("My name is Hong \n", fp);
+	fputs("Your name is Yoon \n", fp);
+	fclose(fp);
+	return 0;
+}
+*/
+
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	char str[30];
+	int ch;
+	FILE * fp = fopen("simple.txt", "rt");
+	if (fp == NULL) {
+		puts("파일오픈 실패!");
+		return -1;
+	}
+
+	ch = fgetc(fp);
+	printf("%c \n", ch);
+	ch = fgetc(fp);
+	printf("%c \n", ch);
+
+	fgets(str, sizeof(str), fp);
+	printf("%s", str);
+	fgets(str, sizeof(str), fp);
+	printf("%s", str);
+
+	fclose(fp);
+	return 0;
+}
+*/
+
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	FILE * src = fopen("src.txt" ,"rt");
+	FILE * des = fopen("des.txt" ,"wt");
+	int ch;
+
+	if (src == NULL)
+	{
+		puts("파일오픈 실패!");
+		return -1;
+	}
+	if (des == NULL) 
+	{
+		fclose(src);
+		puts("파일오픈 실패!");
+		return -1;
+	}
+
+	while ((ch - fgetc(src)) != EOF)
+	{
+		fputc(ch, des);
+	}
+	if (feof(src) != 0){
+		puts("파일복사 완료!");
+	}
+	else{
+		puts("파일복사 실패!");
+	}
+
+	fclose(src);
+	fclose(des);
+	return 0;
+}
+*/
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	FILE * src;
+	FILE * des;
+	char *cpSrcFile = "src.txt";
+	char *cpDstFile = "dst.txt";
+	int ch;
+
+	src = fopen("src.txt", "rt");
+	if (src == NULL)
+	{
+		puts("파일오픈 실패!");
+		return 101;
+	}
+
+	des = fopen("dst.txt", "wt");
+	if (des == NULL)
+	{
+		fclose(src);
+		puts("파일오픈 실패!");
+		return 102;
+	}
+
+	while ((ch = fgetc(src)) != EOF)
+		fputc(ch, des);
+
+	if (feof(src) != 0)
+		puts("파일복사 완료!");
+
+	else
+		puts("파일복사 실패!");
+
+	fclose(src);
+	fclose(des);
+
+	return 0;
+
+}*/
+/*
+#include<stdio.h>
+
+int main(void)
+{
+	FILE * src;
+	FILE * des;
+	char *cpSrcFile = "src.txt";
+	char *cpDstFile = "dst.txt";
+	int ch;
+
+	src = fopen(cpSrcFile, "rt");
+	if (src == NULL)
+	{
+		printf("[%s] 파일오픈 실패!\n", cpSrcFile);
+		return 101;
+	}
+
+	des = fopen(cpDstFile, "wt");
+	if (des == NULL)
+	{
+		fclose(src);
+		printf("[%s] 파일오픈 실패!\n", cpDstFile);
+		return 102;
+	}
+
+	for (;;)
+	{
+		ch = fgetc(src);
+		if (EOF == ch)
+		{
+			break;
+		}
+		fputc(ch, des);
+	}
+
+	if (feof(src) != 0) // src 파일의 끝에 도달한 경우
+	{
+		puts("파일복사 완료!");
+	}
+	else // src 파일의 끝에 도달하지 않은 경우
+	{
+		puts("파일복사 실패!");
+	}
+
+	fclose(src);
+	fclose(des);
+
+	return 0;
+}
+*/
+
+/*
+//문제 생김!
+#include <stdio.h>
+
+int main(void)
+{
+	FILE * src = fopen("src.bin", "rb");
+	FILE * des = fopen("dst.bin", "wb");
+	char buf[20];
+	int readCnt;
+
+	if (src == NULL)
+	{
+		puts("파일오픈 실패!");
+		return -1;
+	}
+	if (des == NULL)
+	{
+		fclose(src);
+		puts("파일오픈 실패!");
+		return -1;
+	}
+	while (1)
+	{
+		readCnt = fread((void*)buf, 1, sizeof(buf), src);
+
+		if (readCnt < sizeof(buf))
+		{
+			if (feof(src) != 0)
+			{
+				fwrite((void*)buf, 1, readCnt, des);
+				puts("파일복사 완료");
+				break;
+			}
+			else
+			{
+				puts("파일복사 실패");
+
+				break;
+			}
+		}
+	}return 0;
+}
+*/
+		/*
+#include <stdio.h>
+
+int main(void)
+{
+	int buf[] = { 1, 2, 3, 4, 5, 6, 7 };
+	int iRet;
+	FILE *stFile;
+	stFile = fopen("unity.bin", "wb");
+
+	if (0 == stFile)
+	{
+		printf("파일을 열수가 없습니다.\n");
+		return 100;
+	}
+	//fwrite(buf, sizeof(int), sizeof(buf)/sizeof(int), stFile);
+	iRet = fwrite(buf, 4, 7, stFile);
+
+	printf("%d만큼 파일에 쓰는 것을 완료 했습니다.\n", iRet*sizeof(int));
+
+	fclose(stFile);
+
+	return 0;
+
+}
+*/
+
+/*
+#include<stdio.h>
+
+int main(void)
+{
+	char name[10];
+	char sex;
+	int age;
+
+	FILE * fp = fopen("friend.txt", "wt");
+	int i;
+
+	for (i = 0; i < 3; ++i)
+	{
+		printf("이름 성별 나이 순 입력: ");
+		scanf("%s %c %d", name, &sex, &age);
+		getchar(); //버퍼에 남아있는 \n의 소멸을 위해서
+		fprintf(fp, "%s %c %d", name, sex, age);
+
+	}
+	fclose(fp);
+	return 0;
+}
+*/
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	char name[10];
+	char sex;
+	int age;
+
+	FILE * fp = fopen("friend.txt", "rt");
+	int ret;
+
+	while (1)
+	{
+		ret = fscanf(fp,"%s %c %d", name, &sex, &age);
+		if (ret == EOF)
+			break;
+		printf("%s %c %d \n", name, sex, age);
+	}
+	fclose(fp);
+	return 0;
+}
+*/
+/*
+#include <stdio.h>
+typedef struct fren
+{
+	char name[10];
+	char sex;
+	int age;
+} Friend;
+
+int main(void)
+{
+	FILE*fp;
+	Friend myfren1;
+	Friend myfren2;
+
+	///file write///
+	fp = fopen("friend.bin", "wb");
+	printf("이름, 성별, 나이 순 입력 : ");
+	scanf("%s %c %d", myfren1.name, &(myfren1.sex), &(myfren1.age));
+	fwrite((void*)&myfren1, sizeof(myfren1), 1, fp);
+	fclose(fp);
+
+	///file read///
+	fp = fopen("friend.bin", "rb");
+	fread((void*)&myfren2, sizeof(myfren2), 1, fp);
+	printf("%s %c %d", myfren2.name, myfren2.sex, myfren2.age);
+	fclose(fp);
+	return 0;
+}
+
+*/
