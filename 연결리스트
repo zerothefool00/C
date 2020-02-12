@@ -1,0 +1,64 @@
+//연결리스트
+
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct _Node
+{
+	int iNum;
+	struct _Node*Next;
+} Node;
+
+void NodePrint(Node*Temp;)
+{
+	while (Temp != 0)
+	{
+		fprintf(stdout, "[%d] ->", Temp->iNum);
+		Temp = Temp->Next;
+	}
+	printf("NULL\n");
+}
+
+int main()
+{
+	Node*Head;
+	Node*Temp;
+
+	Head = malloc(sizeof(Node));
+	Head->iNum = 1;
+	Head->Next = 0;
+
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 2;
+	Temp->Next = Head;
+
+	Head = Temp;
+
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 3;
+	Temp->Next = Head;
+	
+	Head = Temp;
+#if 0
+	fprintf(stdout, "[%d] ->", Temp->iNum); //3
+	Temp = Temp->Next;
+	fprintf(stdout, "[%d] ->", Temp->iNum); //2
+	Temp = Temp->Next;
+	fprintf(stdout, "[%d] ->", Temp->iNum); //1
+	printf("NULL\n");
+#elif 0
+	Temp = Head;
+	while (Temp!=0)
+	{
+		fprintf(stdout, "[%d] ->", Temp->iNum);
+		Temp = Temp->Next;
+	}
+	printf("NULL\n");
+#else
+	
+	NodePrint(Head);
+
+#endif
+
+	return 0;
+}
