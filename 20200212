@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+int iENum1;			// BSS
+int iENum2 = 100;	// Data
+int iENum3;			// BSS
+int iENum4 = 100;	// Data
+int iENum5;			// BSS
+int iENum6 = 100;	// Data
+
+int main(void)
+{
+	int *		iP = malloc(4);	// Heap
+	int			iLNum1;			// Stack
+	int			iLNum2;			// Stack
+	static int	iLNum3;			// BSS
+	static int	iLNum4	= 100;	// Data
+	static int	iLNum5;			// BSS
+	int			iLNum6;			// Stack
+
+	printf("[Code ] 0x%p main함수의 주소\n", main);
+	printf("[BSS  ] 0x%p iENum1\n", &iENum1);
+	printf("[BSS  ] 0x%p iENum3\n", &iENum3);
+	printf("[BSS  ] 0x%p iENum5\n", &iENum5);
+	printf("[Data ] 0x%p iENum2\n", &iENum2);
+	printf("[Data ] 0x%p iENum4\n", &iENum4);
+	printf("[Data ] 0x%p iENum6\n\n", &iENum6);
+
+	printf("[Heap ] 0x%p iP의 동적할당 주소\n", iP);
+
+	printf("[Stack] 0x%p iLNum1\n", &iLNum1);
+	printf("[Stack] 0x%p iLNum2\n", &iLNum2);
+	printf("[Stack] 0x%p iLNum6\n", &iLNum6);
+	printf("[BSS  ] 0x%p iLNum3\n", &iLNum3);
+	printf("[BSS  ] 0x%p iLNum5\n", &iLNum5);
+	printf("[Data ] 0x%p iLNum4\n", &iLNum4);
+	
+	free(iP);
+
+	return 0;
+}
