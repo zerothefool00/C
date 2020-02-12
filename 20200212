@@ -1,3 +1,4 @@
+/*
 #include <stdio.h>
 
 int iENum1;			// BSS
@@ -9,13 +10,13 @@ int iENum6 = 100;	// Data
 
 int main(void)
 {
-	int *		iP = malloc(4);	// Heap
-	int			iLNum1;			// Stack
-	int			iLNum2;			// Stack
+	int *	        iP = malloc(4);	        // Heap
+	int	        iLNum1;			// Stack
+	int	        iLNum2;			// Stack
 	static int	iLNum3;			// BSS
-	static int	iLNum4	= 100;	// Data
+	static int	iLNum4	= 100;	        // Data
 	static int	iLNum5;			// BSS
-	int			iLNum6;			// Stack
+	int		iLNum6;			// Stack
 
 	printf("[Code ] 0x%p main함수의 주소\n", main);
 	printf("[BSS  ] 0x%p iENum1\n", &iENum1);
@@ -38,3 +39,70 @@ int main(void)
 
 	return 0;
 }
+*/
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+char * ReadUserName(void)
+{
+	char * name = (char *)malloc(sizeof(char) * 30);	//casting?
+	printf("What's your name? ");
+	gets(name);
+	return name;
+}
+
+int main(void)
+{
+	char * name1;
+	char * name2;
+	name1 = ReadUserName();
+
+	printf("name1: %s \n", name1);
+	name2 = ReadUserName();
+	printf("name2: %s \n", name2);
+
+	printf("again name1: %s \n", name1);
+	printf("again name2: %s \n", name2);
+	free(name1);
+	//name1 = 0;
+	free(name2);
+	//name2 = 0;
+	return 0;
+}
+*/
+
+#include <stdio.h>
+
+int * Integer(int iNum)
+{
+	static int iTestNum;
+	iTestNum = iNum;
+	printf("Integer called : [%d]\n", iNum);
+	return &iNum;	//이넘이 주소를 반환할때는 보호 받을 수 있는 녀석이어야함 문제! or static or malloc까지 
+}
+void test(int iNum)
+{
+	printf("test called : [%d]\n", iNum);
+	return;
+}
+void test2(float fNum)
+{
+	printf("test2 called : [%f]\n", fNum);
+	return;
+}
+int main(void)
+{
+	int * ipNum = Integer(5);
+
+	printf("*ipNum = %d\n", *ipNum);
+	*ipNum = 9;
+	test(100);
+	printf("*ipNum = %d\n", *ipNum);
+	test2(13.5f);
+	printf("*ipNum = %d\n", *ipNum);
+
+	return 0;
+}
+
+
