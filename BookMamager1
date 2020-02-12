@@ -1,0 +1,216 @@
+/*
+#include <stdio.h>
+#include <string.h>
+
+#define LEN_TITLE 30
+
+void BookPrint(char * caTitle)
+{
+	printf("BookPrint 이름 : [%s]\n", caTitle);
+}
+int main(void)
+{
+	char caTitle[LEN_TITLE];
+
+	printf("이름 : ");
+	fgets(caTitle, LEN_TITLE, stdin);
+	caTitle[strlen(caTitle) - 1] = 0;
+	BookPrint(caTitle);
+
+
+	return 0;
+}
+
+#include <stdio.h>
+#include <string.h>
+
+#define LEN_TITLE  30
+#define LEN_WRITER  30
+
+void BookPrint(char * caTitle, char * caWriter)
+{
+	printf("이름 : [%s]\n", caTitle);
+	printf("저자 : [%s]\n", caWriter);
+}
+int main(void)
+{
+	char caTitle[LEN_TITLE];
+	char caWriter[LEN_WRITER];
+
+	fprintf(stdout, "이름 : ");
+	fgets(caTitle, LEN_TITLE, stdin);
+	caTitle[strlen(caTitle) - 1] = 0;
+	fprintf(stdout, "저자 : ");
+	fgets(caWriter, LEN_WRITER, stdin);
+	caWriter[strlen(caWriter) - 1] = 0;
+
+	BookPrint(caTitle, caWriter);
+
+
+	return 0;
+}
+
+#include <stdio.h>
+#include <string.h>
+
+#define LEN_TITLE  30
+#define LEN_WRITER  30
+
+void BookPrint(char * caTitle, char * caWriter, unsigned int uiPrice)
+{
+	printf("이름 : [%s]\n", caTitle);
+	printf("저자 : [%s]\n", caWriter);
+	printf("가격 : [%d]\n", uiPrice);
+}
+int main(void)
+{
+	char caTitle[LEN_TITLE];
+	char caWriter[LEN_WRITER];
+	unsigned int uiPrice;
+
+	fprintf(stdout, "이름 : ");
+	fgets(caTitle, LEN_TITLE, stdin);
+	caTitle[strlen(caTitle) - 1] = 0;
+	fprintf(stdout, "저자 : ");
+	fgets(caWriter, LEN_WRITER, stdin);
+	caWriter[strlen(caWriter) - 1] = 0;
+	fprintf(stdout, "가격 : ");
+	scanf("%d", &uiPrice);
+
+	BookPrint(caTitle, caWriter, uiPrice);
+
+
+	return 0;
+}
+
+#include <stdio.h>
+#include <string.h>
+
+#define LEN_TITLE  30
+#define LEN_WRITER  30
+
+void BookPrint(char * caTitle, char * caWriter, unsigned int uiPrice)
+{
+	printf("이름 : [%s]\n", caTitle);
+	printf("저자 : [%s]\n", caWriter);
+	printf("가격 : [%d]\n", uiPrice);
+}
+int main(void)
+{
+	char caTitle[LEN_TITLE];
+	char caWriter[LEN_WRITER];
+	unsigned int uiPrice;
+
+	fprintf(stdout, "이름 : ");
+	fgets(caTitle, LEN_TITLE, stdin);
+	caTitle[strlen(caTitle) - 1] = 0;
+	fprintf(stdout, "저자 : ");
+	fgets(caWriter, LEN_WRITER, stdin);
+	caWriter[strlen(caWriter) - 1] = 0;
+	fprintf(stdout, "가격 : ");
+	scanf_s("%d", &uiPrice);
+
+	BookPrint(caTitle, caWriter, uiPrice);
+
+
+	return 0;
+}
+
+#include <stdio.h>
+#include <string.h>
+
+#define LEN_TITLE  30
+#define LEN_WRITER  30
+void BookInput(// 매개변수/인자/인수를 적으시오 //)
+{
+	fprintf(stdout, "이름 : ");
+	fgets(caTitle, LEN_TITLE, stdin);
+	caTitle[strlen(caTitle) - 1] = 0;
+	fprintf(stdout, "저자 : ");
+	fgets(caWriter, LEN_WRITER, stdin);
+	caWriter[strlen(caWriter) - 1] = 0;
+	fprintf(stdout, "가격 : ");
+	scanf_s("%d", &uiPrice);
+}
+void BookPrint(char * caTitle, char * caWriter, unsigned int uiPrice)
+{
+	printf("이름 : [%s]\n", caTitle);
+	printf("저자 : [%s]\n", caWriter);
+	printf("가격 : [%d]\n", uiPrice);
+}
+int main(void)
+{
+	char caTitle[LEN_TITLE];
+	char caWriter[LEN_WRITER];
+	unsigned int uiPrice;
+
+	// 책 정보 입력
+	//BookInput(// 매개변수/인자/인수를 적으시오 //);
+
+	// 책 정보 출력
+	BookPrint(caTitle, caWriter, uiPrice);
+
+
+	return 0;
+}
+
+
+#include <stdio.h>
+#include <string.h>
+
+#define LEN_TITLE  30
+#define LEN_WRITER  30
+
+typedef struct _Book
+{
+	char caTitle[LEN_TITLE];
+	char caWriter[LEN_WRITER];
+	unsigned int uiPrice;
+} Book;
+
+void BookInput(char * caTitle, char * caWriter, unsigned int *uipPrice)
+{
+	fprintf(stdout, "이름 : ");
+	fgets(caTitle, LEN_TITLE, stdin);
+	caTitle[strlen(caTitle) - 1] = 0;
+	fprintf(stdout, "저자 : ");
+	fgets(caWriter, LEN_WRITER, stdin);
+	caWriter[strlen(caWriter) - 1] = 0;
+	fprintf(stdout, "가격 : ");
+	scanf_s("%d", uipPrice);
+}
+void BookPrint(char * caTitle, char * caWriter, unsigned int uiPrice)
+{
+	printf("이름 : [%s]\n", caTitle);
+	printf("저자 : [%s]\n", caWriter);
+	printf("가격 : [%d]\n", uiPrice);
+}
+int main(void)
+{
+	char caTitle[LEN_TITLE];
+	char caWriter[LEN_WRITER];
+	unsigned int uiPrice;
+
+	// 책 정보 입력
+	BookInput(caTitle, caWriter, &uiPrice);
+
+	// 책 정보 출력
+	BookPrint(caTitle, caWriter, uiPrice);
+
+
+	return 0;
+}
+*/
+#include "book.h"
+
+int main(void)
+{
+	Book stChack1;
+
+	BookInput(&stChack1);
+	BookPrint(&stChack1);
+
+
+	return 0;
+}
+
