@@ -344,8 +344,17 @@ int main()
 	NodeAdd(&Head, 21);
 	NodeAdd(&Head, 2);
 	NodePrint(Head);///////////////
+	NodeDel(&Head, 21);
+	NodeDel(&Head, 1);
+	NodeDel(&Head, 55);
+	NodeDel(&Head, 7);
+	NodePrint(Head);//////////////
 
 	NodeAllFree(Head);
+	Head = 0;
+	NodePrint(Head);/////////////
+	NodeDel(&Head, 7);
+	NodePrint(Head);
 
 	return 0;
 }
