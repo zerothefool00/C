@@ -1,0 +1,351 @@
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _Node
+{
+	int iNum;
+	struct _Node * Next;
+} Node;
+
+void NodeInsert(Node* * stppHead, Node * stpNewItem)
+{
+	Node * Temp = *stppHead;
+	Node * Follow = Temp;
+
+
+	// 1. 삽입 위치 검색
+	while (0 != Temp)
+	{
+		if (Temp->iNum > stpNewItem->iNum)
+		{
+			break;  // 삽입할 위치 찾음
+		}
+		Follow = Temp;
+		Temp = Temp->Next;
+	}
+	// 2. 아이템 삽입
+	stpNewItem->Next = Temp;  //맨앞, 중간 ,끝 모두 가능
+	if (Follow != Temp) //중간, 끝일경우
+	{
+		Follow->Next = stpNewItem;	//중간, 끝 가능
+	}
+	else//  맨앞 삽입
+	{
+		//6000자리에 9천 넣기
+		*stppHead = stpNewItem;
+	}
+}
+*/
+/*
+void NodePrint(Node *Temp)
+{
+	while (0 != Temp)
+	{
+		printf("[%d] -> ", Temp->iNum);
+		Temp = Temp->Next;
+	}
+	printf("NULL\n");
+}
+
+int main()
+{
+	Node *Head = 0;
+	Node *Temp;
+
+	Head = malloc(sizeof(Node));
+	Head->iNum = 30;
+	Head->Next = 0;
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 20;
+	Temp->Next = Head;
+	Head = Temp;
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 10;
+	Temp->Next = Head;
+	Head = Temp;
+
+	NodePrint(Head);
+
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 5;
+	NodeInsert(&Head, Temp);
+	NodePrint(Head);
+
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 11;
+	NodeInsert(&Head, Temp);
+	NodePrint(Head);
+
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 35;
+	NodeInsert(&Head, Temp);
+	NodePrint(Head);
+
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 3;
+	NodeInsert(&Head, Temp);
+	NodePrint(Head);
+
+	return 0;
+}
+*/
+
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _Node
+{
+	int iNum;
+	struct _Node * Next;
+} Node;
+
+void NodeInsert(Node* * stppHead, Node * stpNewItem)
+{
+	Node * Temp = *stppHead;
+	Node * Follow = Temp;
+
+	// 1.  검색
+	while (0 != Temp)
+	{
+		if (Temp->iNum > stpNewItem->iNum)
+		{
+			break;  // 삽입할 위치 찾음
+		}
+		Follow = Temp;
+		Temp = Temp->Next;
+	}
+	// 2. 삽입
+	stpNewItem->Next = Temp;
+	if (Follow != Temp)  // 중간, 끝 삽입
+	{
+		Follow->Next = stpNewItem;  // 중간, 끝 가능
+	}
+	else // 맨앞 삽입
+	{
+		*stppHead = stpNewItem;
+	}
+}
+
+void NodePrint(Node *Temp)
+{
+	while (0 != Temp)
+	{
+		printf("[%d] -> ", Temp->iNum);
+		Temp = Temp->Next;
+	}
+	printf("NULL\n");
+}
+
+int main()
+{
+	Node *Head = 0;
+	Node *Temp;
+
+	NodePrint(Head);///////////////
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 10;
+	NodeInsert(&Head, Temp);
+	NodePrint(Head);/////////////////
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 100;
+	NodeInsert(&Head, Temp);
+	NodePrint(Head);/////////////////
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 13;
+	NodeInsert(&Head, Temp);
+	NodePrint(Head);/////////////////
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 75;
+	NodeInsert(&Head, Temp);
+	NodePrint(Head);/////////////////
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = 1;
+	NodeInsert(&Head, Temp);
+	NodePrint(Head);/////////////////
+
+
+	return 0;
+}
+*/
+
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _Node
+{
+	int iNum;
+	struct _Node * Next;
+} Node;
+
+void NodeInsert(Node* * stppHead, Node * stpNewItem)
+{
+	Node * Temp = *stppHead;
+	Node * Follow = Temp;
+
+	// 1.  검색
+	while (0 != Temp)
+	{
+		if (Temp->iNum > stpNewItem->iNum)
+		{
+			break;  // 삽입할 위치 찾음
+		}
+		Follow = Temp;
+		Temp = Temp->Next;
+	}
+	// 2. 삽입
+	stpNewItem->Next = Temp;
+	if (Follow != Temp)  // 중간, 끝 삽입
+	{
+		Follow->Next = stpNewItem;  // 중간, 끝 가능
+	}
+	else // 맨앞 삽입
+	{
+		*stppHead = stpNewItem;
+	}
+}
+
+void NodeAdd(Node* * stppHead, int iItem)
+{
+	Node* Temp;
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = iItem;
+	NodeInsert(stppHead, Temp);
+
+	return;
+}
+
+void NodePrint(Node *Temp)
+{
+	while (0 != Temp)
+	{
+		printf("[%d] -> ", Temp->iNum);
+		Temp = Temp->Next;
+	}
+	printf("NULL\n");
+}
+
+int main()
+{
+	Node *Head = 0;
+	Node *Temp;
+
+	NodePrint(Head);///////////////
+	NodeAdd(&Head, 3);
+	NodePrint(Head);///////////////
+
+	return 0;
+}
+
+*/
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _Node
+{
+	int iNum;
+	struct _Node * Next;
+} Node;
+
+void NodeInsert(Node* * stppHead, Node * stpNewItem)
+{
+	Node * Temp = *stppHead;
+	Node * Follow = Temp;
+
+	// 1.  검색
+	while (0 != Temp)
+	{
+		if (Temp->iNum > stpNewItem->iNum)
+		{
+			break;  // 삽입할 위치 찾음
+		}
+		Follow = Temp;
+		Temp = Temp->Next;
+	}
+	// 2. 삽입
+	stpNewItem->Next = Temp;
+	if (Follow != Temp)  // 중간, 끝 삽입
+	{
+		Follow->Next = stpNewItem;  // 중간, 끝 가능
+	}
+	else // 맨앞 삽입
+	{
+		*stppHead = stpNewItem;
+	}
+}
+
+void NodeAdd(Node* * stppHead, int iItem)
+{
+	Node* Temp;
+	Temp = malloc(sizeof(Node));
+	Temp->iNum = iItem;
+	NodeInsert(stppHead, Temp);
+
+	return;
+}
+
+void NodeAllFree(Node* Head)
+{
+	Node*Temp = Head;
+	while (0 != Head)
+	{
+		Head = Head->Next;
+		free(Temp);
+		Temp = Head;
+	}
+}
+
+void NodePrint(Node *Temp)
+{
+	while (0 != Temp)
+	{
+		printf("[%d] -> ", Temp->iNum);
+		Temp = Temp->Next;
+	}
+	printf("NULL\n");
+}
+
+int main()
+{
+	Node *Head = 0;
+	Node *Temp;
+
+
+	NodeAdd(&Head, 1);
+	NodeAdd(&Head, 3);
+	NodeAdd(&Head, 100);
+	NodeAdd(&Head, 34);
+	NodeAdd(&Head, 16);
+	NodeAdd(&Head, 51);
+	NodeAdd(&Head, 59);
+	NodeAdd(&Head, 71);
+	NodePrint(Head);///////////////
+
+	NodeAllFree(Head);
+
+	return 0;
+}
+*/
+
+#include <stdio.h>
+#include "Node.h"
+
+int main()
+{
+	Node *Head = 0;
+
+	NodeAdd(&Head, 3);
+	NodeAdd(&Head, 1);
+	NodeAdd(&Head, 55);
+	NodeAdd(&Head, 33);
+	NodeAdd(&Head, 21);
+	NodeAdd(&Head, 2);
+	NodePrint(Head);///////////////
+
+	NodeAllFree(Head);
+
+	return 0;
+}
