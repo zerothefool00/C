@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include "book.h"
+
+int main()
+{
+	int iRet;
+	Node*Head = 0;
+
+	BannerStart();
+	NodePrint(Head);
+
+	NodeAdd(&Head);
+	NodePrint(Head);
+
+	return 0;
+}
