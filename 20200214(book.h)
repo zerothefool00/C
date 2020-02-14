@@ -1,0 +1,44 @@
+#ifndef BOOK_H
+#define BOOK_H
+
+#include <stdio.h>
+#include <string.h>
+
+#define LEN_BOOK  30
+#define LEN_AUTH  15
+#define LEN_PUBL  15
+#define LEN_PRIC  15
+#define LEN_YEAR  15
+#define FILE_NAME  "BOOK.DBF"
+
+typedef struct booktype
+{
+	char book[LEN_BOOK];
+	char author[LEN_AUTH];
+	char publisher[LEN_PUBL];
+	char price[LEN_PRIC];
+	char year[LEN_YEAR];
+} Book;
+
+typedef struct _Node
+{
+	Book BData;
+	struct _Node * Next;
+} Node;
+
+
+void NodePrint(Node *);
+void NodeAllFree(Node *);
+void NodeAdd(Node **);
+void NodeInsert(Node **, Node *);
+void NodeDel(Node**, const char *);
+
+void BannerStart();
+void BookInput(Book *);
+void BookPrint(Book *);
+void BookFileClose();
+int BookFileOpen();
+int BookSave(Book *);
+int BookLoad(Book *);
+
+#endif //BOOK_H
