@@ -1,0 +1,175 @@
+#include "book.h"
+
+static FILE* DataBase;
+
+int BookFileOpen()
+{
+	fopen_s(&DataBase, FILE_NAME, "ab+");
+
+	if (0 == DataBase)
+	{
+		fprintf(stderr, "[%s] 파일을 열 수 없습니다.\n", FILE_NAME);
+		return 101;  // 101 : Database 파일 생성/Open 문제 발생
+	}
+	return 0;	// Database 파일 정상 Open
+}
+
+void BookFileClose()
+{
+	fclose(DataBase);
+	DataBase = 0;
+}
+
+int BookSave(Book *Data)
+{
+	if (1 != fwrite(Data, sizeof(Book), 1, DataBase))
+	{
+		return 103;		// 103 : Database 파일 Write 문제 발생
+	}
+	return 0;			// Database 파일 정상 Write
+}
+int BookLoad(Book *Data)
+{
+	if (1 != fread(Data, sizeof(Book), 1, DataBase))
+	{
+		return 102;		// 102 : Database 파일 Read 문제 발생
+	}
+
+	return 0;			// Database 파일 정상 Read
+}
+void BookInput(Book *Data)
+{
+	fprintf(stdout, "제  목 : ");
+	fgets(Data->book, LEN_BOOK, stdin);
+	Data->book[strlen(Data->book) - 1] = 0;
+	fprintf(stdout, "저  자 : ");
+	fgets(Data->author, LEN_AUTH, stdin);
+	Data->author[strlen(Data->author) - 1] = 0;
+	fprintf(stdout, "출판사 : ");
+	fgets(Data->publisher, LEN_PUBL, stdin);
+	Data->publisher[strlen(Data->publisher) - 1] = 0;
+	fprintf(stdout, "가  격 : ");
+	fgets(Data->price, LEN_PRIC, stdin);
+	Data->price[strlen(Data->price) - 1] = 0;
+	fprintf(stdout, "발간일 : ");
+	fgets(Data->year, LEN_YEAR, stdin);
+	Data->year[strlen(Data->year) - 1] = 0;
+}
+
+void BookPrint(Book *Data)
+{
+	fprintf(stdout, "제  목 : %s\n", Data->book);
+	fprintf(stdout, "저  자 : %s\n", Data->author);
+	fprintf(stdout, "출판사 : %s\n", Data->publisher);
+	fprintf(stdout, "가  격 : %s\n", Data->price);
+	fprintf(stdout, "발간일 : %s\n", Data->year);
+}
+void BannerStart()
+{
+	fprintf(stdout, "#######################################\n");
+	fprintf(stdout, "##                                   ##\n");
+	fprintf(stdout, "##      Book Management Program      ##\n");
+	fprintf(stdout, "##                                   ##\n");
+	fprintf(stdout, "#######################################\n");
+}
+
+
+
+
+
+
+
+
+void NodeDel(Node* * stppHead, const char * BName)
+{
+	Node * Temp = *stppHead;
+	Node * Follow = Temp;
+
+	// 1.  검색
+	while (0 != Temp)
+	{
+		if (0 == strcmp(Temp->BData.book, BName))
+		{
+			break;	// 삭제할 위치 찾음
+		}
+		Follow = Temp;
+		Temp = Temp->Next;
+	}
+	// 2. 삭제
+	if (0 == Temp) // 삭제 대상이 없을 때
+	{
+		printf("삭제할 대상이 아닙니다\n");
+		return;
+	}
+	if (Follow == Temp)// 맨앞
+	{
+		*stppHead = Temp->Next;
+	}
+	else// 중간, 맨뒤, 
+	{
+		Follow->Next = Temp->Next;
+	}
+
+	free(Temp);
+	return;
+}
+
+void NodeInsert(Node* * stppHead, Node * stpNewItem)
+{
+	Node * Temp = *stppHead;
+	Node * Follow = Temp;
+
+	// 1.  검색
+	while (0 != Temp)
+	{
+		if (0  > strcmp(Temp->BData.book, stpNewItem->BData.book))
+		{
+			break;	// 삽입할 위치 찾음
+		}
+		Follow = Temp;
+		Temp = Temp->Next;
+	}
+	// 2. 삽입
+	stpNewItem->Next = Temp;
+	if (Follow != Temp)	// 중간, 끝 삽입
+	{
+		Follow->Next = stpNewItem;	// 중간, 끝 가능
+	}
+	else // 맨앞 삽입
+	{
+		*stppHead = stpNewItem;
+	}
+}
+
+void NodeAdd(Node* * stppHead)
+{
+	Node* Temp;
+	Temp = malloc(sizeof(Node));
+	BookInput(&(Temp->BData));
+	NodeInsert(stppHead, Temp);
+
+	return;
+}
+void NodeAllFree(Node *Head)
+{
+	Node *Temp = Head;
+	while (0 != Head)
+	{
+		Head = Head->Next;
+		free(Temp);
+		Temp = Head;
+	}
+}
+void NodePrint(Node *Temp)
+{
+	printf("************************************\n");
+	printf("************* Book List ************\n");
+	printf("**--------------------------------**\n");
+	while (0 != Temp)
+	{
+		BookPrint(&(Temp->BData));
+		Temp = Temp->Next;
+		printf("**--------------------------------**\n");
+	}
+	printf("************************************\n");
+}
