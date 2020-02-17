@@ -1,0 +1,462 @@
+/*
+#include <iostream>
+
+using namespace std;
+
+int main(void)
+{
+	int num = 20;
+	cout<<"Hello World!"<< endl;
+	cout<<"Hello "<<"World!"<<endl ;
+	cout<< num << ' ' << 'A';
+	cout<< ' ' << 3.14 << endl ;
+	return 0;
+}
+*/
+/*
+#include <iostream>
+
+using namespace std;
+
+int main(void)
+{
+	int val1;
+	cout << "첫번째 숫자 입력: ";
+	cin >> val1;
+
+	int val2;
+	cout << "두번째 숫자 입력 : ";
+	cin >> val2;
+
+	int result = val1 + val2;
+	cout << "덧셈결과: " << result << endl;
+	return 0;
+}
+*/
+/*
+#include <iostream>
+
+using namespace std;
+
+int main(void)
+{
+	int val1, val2;
+	int result = 0;
+	cout << "두개의 숫자입력: ";
+	cin >> val1 >> val2;
+
+	if (val1 < val2)
+	{
+		for (int i = val1 + 1; i < val2; i++)
+			result += i;
+	}
+	else
+	{
+		for (int i = val2 + 1; i < val1; i++)
+			result += i;
+	}
+
+	cout << "두 수 사이의 정수 합: " << result << endl;
+	return 0;
+}
+*/
+/*
+#include <iostream>
+
+using namespace std;
+
+int main(void)
+{
+	char name[100];
+	char lang[200];
+
+	cout << "이름은 무엇입니까? ";
+	cin >> name;
+
+	cout << "좋아하는 프로그래밍 언어는 무엇인가요? ";
+	cin >> lang;
+
+	cout << "내 이름은 " << name << "입니다.\n";
+	cout << "제일 좋아하는 언어는 " << lang << "입니다." << endl;
+	return 0;
+}
+
+*/
+/*
+#include <iostream>
+
+using namespace std;
+
+void MyFunc(void)
+{
+	cout << "MyFunc(void) called" << endl;
+}
+
+void MyFunc(char c)
+{
+	cout << "MyFunc(char c) called" << endl;
+}
+
+void MyFunc(int a, int b)
+{
+	cout << "Myfunc(int a, int b) called" << endl;
+}
+
+int main(void)
+{
+	MyFunc();
+	MyFunc('A');
+	MyFunc(12, 13);
+	return 0;
+}
+
+////26page문제
+
+/*
+#include <iostream>
+
+using namespace std;
+
+int main(void)
+{
+	int num1 = 20, num2 = 30;
+	int swap
+	swap(num1 << num2);
+	*swap(&num << &num);
+	cout << num1 << ' ' << num2 << endl;
+
+	char ch1 = 'A', ch2 = 'Z';
+	swap(&ch1, &ch2);
+	cout << ch1 << ' ' << ch2 << endl;
+
+	double
+
+	
+}
+*/
+/*
+# include <iostream>
+
+using namespace std;
+
+int Adder(int num1 = 1, int num2 = 2);
+
+int main(void)
+{
+	cout << Adder() << endl;
+	cout << Adder(5) << endl;
+	cout << Adder(3, 5) << endl;
+	return 0;
+}
+
+int Adder(int num1, int num2)
+{
+	return num1 + num2;
+}
+*/
+/*
+#include <iostream>
+
+using namespace std;
+
+inline int SQUARE(int x)
+{
+	return x*x;
+}
+
+int main(void)
+{
+	cout << SQUARE(5) << endl;
+	cout << SQUARE(12) << endl;
+	return 0;
+}
+*/
+/*
+#include <iostream>
+
+using namespace std;
+
+namespace BestCompImpl
+{
+	void SimpleFunc(void)
+	{
+		cout << "BestCom이 정의한 함수" << endl;
+	}
+}
+
+namespace ProgCompImpl
+{
+	void SimpleFunc(void)
+	{
+		cout << "ProgCom이 정의한 함수" << endl;
+	}
+}
+
+int main(void)
+{
+	BestCompImpl::SimpleFunc();
+	ProgCompImpl::SimpleFunc();
+	return 0;
+}
+*/
+/*
+#include <iostream>
+#include "main.h"
+
+using namespace std;
+
+int main(void)
+{
+	BestComImpl::SimpleFunc();
+	return 0;
+}
+
+void BestComImpl::SimpleFunc(void)
+{
+	cout << "BestCom이 정의한 함수" << endl;
+	PrettyFunc();				//동일 이름공간
+	ProgComImpl::SimpleFunc();	//다른 이름공간
+}
+void BestComImpl::PrettyFunc(void)
+{
+	cout << "So Pretty!!" << endl;
+}
+
+void ProgComImpl::SimpleFunc(void)
+{
+	cout << "ProgCom이 정의한 함수" << endl;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+bool IsPositive(int num)
+{
+	if (num <= 0)
+	{
+		return false;
+	}
+	else
+	{ 
+		return true;
+	}
+}
+
+int main(void)
+{
+	bool isPos;
+	int num;
+	cout << "Input number: ";
+	cin>> num;
+
+	isPos = IsPositive(num);
+	if (isPos)
+	{
+		cout << "Positive number" << endl;
+	}
+	else
+	{
+		cout << "Negative number" << endl;
+	}
+
+	return 0;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+int main(void)
+{
+	int num1 = 1020;
+	int &num2 = num1;
+
+	num2 = 3047;
+	cout << "VAL: " << num1 << endl;
+	cout << "REF: " << num2 << endl;
+
+	cout << "VAL: " <<&num1 << endl;
+	cout << "REF: " <<&num2 << endl;
+	return 0;
+}
+*/
+
+/*
+#include <iostream>
+
+using namespace std;
+
+int main(void)
+{
+	int num = 12;
+	int *ptr = &num;
+	int **dptr = &ptr;
+
+	int &ref = num;
+	int*(&pref) = ptr;
+	int**(&dpref) = dptr;
+
+	cout << ref << endl;
+	cout << *pref << endl;
+	cout << **dpref << endl;
+	return 0;
+}*/
+/*
+#include <iostream>
+
+using namespace std;
+
+void SwapByRef2(int &ref1, int &ref2)
+{
+	int temp = ref1;
+	ref1 = ref2;
+	ref2 = temp;
+}
+
+int main(void)
+{
+	int val1 = 10;
+	int val2 = 20;
+
+	SwapByRef2(val1, val2);
+	cout << "val1: " << val1 << endl;
+	cout << "val2: " << val2 << endl;
+	return 0;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+int& RefRetFumcOne(int &ref)
+{
+	ref++;
+		return ref;
+}
+
+int main(void)
+{
+	int num1 = 1;
+	int &num2 = RefRetFumcOne(num1);
+
+	num1++;
+	num2++;
+	cout << "num1: " << num1 << endl;
+	cout << "num2: " << num2 << endl;
+	return 0;
+
+}
+*/
+/*
+#include <iostream>
+#include <string.h>
+#include <stdlib.h>
+
+using namespace std;
+
+char* MakeStrAdr(int len)
+{
+	//char * str = (char*)malloc(sizeof(char)*len);
+	char * str = new char[len];
+	return str;
+}
+
+int main(void)
+{
+	char* str = MakeStrAdr(20);
+	strcpy(str, "I am so happy~");
+	cout << str << endl;
+	//free(str);
+	delete[]str;
+	return 0;
+}
+*/
+/*
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+
+int main(void)
+{
+	char str1[] = "Result";
+	char str2[30];
+
+	strcpy(str2, str1);
+	printf("%s: %f \n", str1, sin(0.14));
+	printf("%s: %f \n", str2, abs(-1.25));
+	return 0;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+#define ID_LEN	20
+#define MAX_SPD 200
+#define FUEL_STEP  2
+#define ACC_STEP 10
+#define BRK_STEP 10
+
+struct Car
+{
+	char gamerID[ID_LEN];	//소유자 ID
+	int fuelGauge;			//연료량
+	int curspeed;			//현재속도
+
+	void ShowCarState()
+	{
+		cout << "소유자ID: " << gamerID << endl;
+		cout << "연료량: " << fuelGauge << "%" << endl;
+		cout << "현재속도: " << curspeed << "km/s" << endl << endl;
+	}
+
+	void Break()
+	{
+		if (curspeed < BRK_STEP)
+		{
+			curspeed = 0;
+			return;
+		}
+
+		curspeed -= BRK_STEP;
+	}
+
+	void Accel()
+	{
+		if (fuelGauge <= 0)
+		{
+			return;
+		}
+		else
+		{
+			fuelGauge -= FUEL_STEP;
+		}
+		if (curspeed + ACC_STEP >= MAX_SPD)
+		{
+			curspeed = MAX_SPD;
+			return;
+		}
+
+		curspeed += ACC_STEP;
+	}
+};
+
+
+int main(void)
+{
+	Car run99 = { "run99", 100, 0 };
+	run99.Accel();
+	run99.Accel();
+	run99.ShowCarState();
+	run99.Break();
+	run99.ShowCarState();
+
+	Car sped77 = { "speed77", 100, 0 };
+	sped77.Accel();
+	sped77.Break();
+	sped77.ShowCarState();
+	return 0;
+}
+*/
