@@ -1,0 +1,823 @@
+/*
+#include <iostream>
+
+using namespace std;
+
+class unity
+{
+	int iNum1;		//클래스 멤버 private 멤버
+	public:			//public 접근 지정자 + 콜론
+		int iNum2;	//변수 타입 + 변수이름 + 세미콜론
+	private:		//private 접근지정자 + 콜론
+		int iNum3;  //클래스 멤버 private 멤버
+
+	public:
+		void SetiNum1(int iNum)
+		{
+			if (300 < iNum)//값에 대한 제어 및 통제
+			{
+				iNum = 300;
+			}
+			if (100 > iNum)
+			{
+				iNum = 100;
+			}
+			iNum1 = iNum;
+		}
+		void SetiNum3(int iNum) //const 쓰기 불가
+		{
+			iNum3 = iNum;
+		}
+		int GetiNum1() const	//함수에 값을 변화시키는 기능이 없다.
+		{
+			return iNum1;
+		}
+		int GetiNum3()
+		{
+			return iNum3;
+		}
+};
+
+int main(void)
+{
+	unity Obj1;
+
+	
+	
+
+	Obj1.SetiNum1(100);		// Obj.iNum1 = 100;
+	Obj1.iNum2 = 200;
+	Obj1.SetiNum3(300);		//Obj.iNum3 = 300;
+	Obj1.GetiNum3();
+	cout << "Obj1.iNum1: " << Obj1.GetiNum1() << endl;
+	cout << "Obj1.iNum2: " << Obj1.iNum2 << endl;
+	cout << "Obj1.iNum3: " << Obj1.GetiNum3() << endl;
+
+	return 0;
+}
+*/
+/*
+int main(void)
+{
+	Car CarObj1 = { 10, "포르쉐", 0 };
+	CarObj1.State();
+	CarObj1.Accel();
+	CarObj1.Accel();
+	CarObj1.Accel();
+	CarObj1.CarBreak();
+	CarObj1.CarBreak();
+	CarObj1.CarBreak();
+
+
+
+	return 0;
+}
+
+#endif 0
+#include <iostream>
+using namespace std;
+
+#if 0
+// 구조체 : 단순히 메모리 확보/제거된다
+// 객체 : 메모리에 생성/소멸(확보 + a:생성자/소멸자)된다
+class unity
+{
+public:
+	// 생성자
+	// 1.클래스 이름과 동일
+	// 2. 반환값이 존재 하지 않음
+	// 3. 객체 생성시 자동으로 호출(직접 호출하지 않는다)
+	unity()
+	{
+		cout << "생성자 호출\n";
+	}
+	~unity()
+	{
+		cout << "소멸자 호출\n";
+	}
+};
+
+int main()
+{
+	cout << "1============\n";
+	unity Obj1;
+	cout << "2============\n";
+
+	return 0;
+}
+
+
+
+#elif 1
+class Car
+{
+private:
+	float  gas;
+	char  maker[10];
+	double  speed;
+public:
+	Car()
+	{
+
+	}
+	void CarBreak()
+	{
+		speed = speed - 5;
+		StateSpeed();
+	}
+	void Accel()
+	{
+		speed = speed + 5;
+		StateSpeed();
+	}
+	void State()
+	{
+		cout << "메이커 [" << maker << "]\n";
+		cout << "연  비 [" << gas << "]\n";
+		StateSpeed();
+	}
+	void StateSpeed()
+	{
+		cout << "속  도 [" << speed << "]\n";
+	}
+};
+
+int main(void)
+{
+	Car CarObj1 = { 10, "포르쉐", 0 };
+
+	return 0;
+}
+
+#endif
+*/
+
+/*
+#include <iostream>
+using namespace std;
+
+class SimpleClass
+{
+	private:
+		int num1;
+		int num2;
+	public:	SimpleClass()
+	{
+		num1 = 0;
+		num2 = 0;
+	}
+			SimpleClass(int n)
+			{
+				num1 = n;
+				num2 = 0;
+			}
+			SimpleClass(int n1, int n2)
+			{
+				num1 = n1;
+				num2 = n2;
+			}
+			/*
+			SimpleClass(int n1 = 0, int n2 = 0)
+			{
+				num1 = n1;
+				num2 = n2;
+			}
+			*/
+/*
+			void ShowData() const
+			{
+				cout << num1 << ' ' << num2 << endl;
+			}
+};
+
+int main(void)
+{
+	SimpleClass sc1;
+	sc1.ShowData();
+
+	SimpleClass sc2(100);
+	sc2.ShowData();
+
+	SimpleClass sc3(100, 200);
+	sc3.ShowData();
+	return 0;
+}
+
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class unity
+{
+public:
+	unity()
+	{
+		cout << "디폴트 생성자 호출\n";
+	}
+	unity(int iNum)
+	{
+		cout << "인자 1개 생성자 호출\n";
+	}
+	unity(int iNum, int iNum2)
+	{
+		cout << "인자 2개 생성자 호출\n";
+	}
+};
+
+int main()
+{
+	unity Obj1;
+//	unity Obj2();
+	unity Obj3(1);
+	unity Obj4(1, 3);
+	return 0;
+}
+*/
+
+/*
+#include <iostream>
+using namespace std;
+
+class Point
+{
+public:
+	int iX;
+	int iY;
+	Point(int x, int y)
+	{
+		iX = x;
+		iY = y;
+	}
+};
+class unity
+{
+public:
+	Point Test;
+	Point Test2;
+
+	unity()
+		: Test(3, 4), Test2(5, 6)		//멤버 이니셜라이저
+	{ 
+		cout << "디폴트 생성자 호출\n";
+	}
+};
+
+int main()
+{
+	Point Obj1(3, 4);
+	unity Obj2;
+	cout << Obj2.Test.iX << endl; // 3
+	cout << Obj2.Test2.iX << endl; // 5
+
+ 	return 0;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class unity
+{
+public:
+	int iNum;
+	unity()
+	{
+		iNum = 0;
+		cout << "디폴트 생성자 호출됨[" << iNum << "]\n";
+	}
+	unity(int iValue)
+	{
+		iNum = iValue;
+		cout << "생성자 호출됨[" << iNum << "]\n";
+	}
+	~unity()
+	{
+		cout << "소멸자 호출됨 [" << iNum << "]\n";
+	}
+};
+
+int main()
+{
+	cout << "1================\n";
+	unity Obj1(10);
+	cout << "2================\n";
+	unity Obj2(20);
+	cout << "3================\n";
+	unity Obj3[5];
+
+	return 0;
+}
+*/
+/*
+#include <iostream>
+#include<cstdlib> //malloc, free
+using namespace std;
+
+class unity
+{
+public:
+	int iNum;
+	unity()
+	{
+		iNum = 0;
+		cout << "디폴트 생성자 호출됨[" << iNum << "]\n";
+	}
+	unity(int iValue)
+	{
+		iNum = iValue;
+		cout << "생성자 호출됨[" << iNum << "]\n";
+	}
+	~unity()
+	{
+		cout << "소멸자 호출됨 [" << iNum << "]\n";
+	}
+};
+
+int main()
+{
+	//c방식
+	unity * cpObj1 = (unity*)malloc(sizeof(unity));
+	free(cpObj1);
+	
+
+	//c++방식
+	unity * cpObj2 = new unity();	    //디폴트 생성자로 객체 생성
+	unity * cpObj3 = new unity(100);	//일반 생성자로 객체 생성
+	delete cpObj2;
+	delete cpObj3;
+	return 0;
+}
+*/
+/*
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Person
+{
+	private:
+		char *name;
+		int age;
+	public:
+	Person(char * myname, int myage)
+	{
+		int len = strlen(myname) + 1;
+		name = new char[len];
+		strcpy(name, myname);
+		age = myage;
+	}
+	Person()
+	{
+		name = NULL;
+		age = 0;
+		cout << "called Person()" << endl;
+	}
+	void SetPersonInfo(char * myname, int myage)	//접근 가능 함수
+	{
+		name = myname;
+		age = myage;
+	}
+	void ShowPersonInfo() const
+	{
+		cout << "이름: " << name << ",";
+		cout << "나이: " << age << endl;
+	}
+	~Person()
+	{
+		delete[] name;
+		cout << "called destructor!" << endl;
+	}
+};
+int main(void)
+{
+	Person parr[3];
+	char namestr[100];
+	char * strptr;
+	int age;
+	int len;
+
+	for (int i = 0; i < 3; i++)
+	{
+		cout << "이름: ";
+		cin >> namestr;
+		cout << "나이: ";
+		cin >> age;
+		len = strlen(namestr) + 1;
+		strptr = new char[len];
+		strcpy(strptr, namestr);
+		parr[i].SetPersonInfo(strptr, age);
+	}
+	parr[0].ShowPersonInfo();
+	parr[1].ShowPersonInfo();
+	parr[2].ShowPersonInfo();
+	return 0;
+}
+*/
+/*
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class person
+{
+	name = NULL;
+	age = 0;
+	cout << "called Person()" << endl;
+};;
+
+
+public:
+	Person(int myage)
+	{
+		Init(NULL, myage);
+	}
+	Person(char *myname)
+	{
+		Init(myname, 0);
+	}
+	Person(char *myname, int myage)
+	{
+		Init(myname, myage);
+	}
+
+	Person()
+	{
+		Init(NULL, 0);
+		cout << "called Person()" << endl;
+	}
+
+	void SetPersonInfo(char *myname, int myage)
+	{
+		if (NULL != name)
+		{
+			delete[]  name;
+		}
+		name = myname;
+		age = myage;
+	}
+
+	void ShowPersonInfo() const
+	{
+		cout << "이름: " << name << ",";
+		cout << "나이: " << age << endl;
+	}
+
+	~Person()
+	{
+		delete[]name;
+		cout << "called destructor!" << endl;
+	}
+};
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Person
+{
+private:
+	char *name;
+	int age;
+	void Init(char *myname, int myage)
+	{
+		if (NULL != myname)
+		{
+			int len = strlen(myname) + 1;
+			name = new char[len];
+			strcpy(name, myname);
+		}
+		else
+		{
+			name = NULL;
+		}
+		age = myage;
+	}
+
+public:
+	Person(int myage)
+	{
+		Init(NULL, myage);
+	}
+	Person(char *myname)
+	{
+		Init(myname, 0);
+	}
+	Person(char *myname, int myage)
+	{
+		Init(myname, myage);
+	}
+
+	Person()
+	{
+		Init(NULL, 0);
+		cout << "called Person()" << endl;
+	}
+
+	void SetPersonInfo(char *myname, int myage)
+	{
+		if (NULL != name)
+		{
+			delete[]  name;
+		}
+		name = myname;
+		age = myage;
+	}
+
+	void ShowPersonInfo() const
+	{
+		cout << "이름: " << name << ",";
+		cout << "나이: " << age << endl;
+	}
+
+	~Person()
+	{
+		delete[]name;
+		cout << "called destructor!" << endl;
+	}
+};
+int main(void)
+{
+	Person parr[3]; // 디폴트 생성자 3번 호출
+	char namestr[100];
+	char* strptr;
+	int age;
+	int len;
+
+	for (int i = 0; i < 3; i++)
+	{
+		cout << "이름: ";
+		cin >> namestr;
+		cout << "나이: ";
+		cin >> age;
+
+		len = strlen(namestr) + 1;
+		strptr = new char[len];
+		strcpy(strptr, namestr);
+		parr[i].SetPersonInfo(strptr, age);
+	}
+	parr[0].ShowPersonInfo();
+	parr[1].ShowPersonInfo();
+	parr[2].ShowPersonInfo();
+
+	return 0;
+}
+int main(void)
+{
+	Person * parr[3]; // 디폴트 생성자 3번 호출
+	char namestr[100];
+	int age;
+
+	for (int i = 0; i < 3; i++)
+	{
+		cout << "이름: ";
+		cin >> namestr;
+		cout << "나이: ";
+		cin >> age;
+		parr[i].new person(namestr, age);
+	}
+	parr[0].ShowPersonInfo();
+	parr[1].ShowPersonInfo();
+	parr[2].ShowPersonInfo();
+	delete parr[0];
+	delete parr[1];
+	delete parr[2];
+	return 0;
+
+	return 0;
+}
+*/
+/*
+#include <iostream>
+#include <windows.h>
+#include <conio.h>
+using namespace std;
+
+void GotoXY(int iX, int iY){
+	COORD stDot = { iX, iY };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), stDot);
+}
+
+int main()
+{
+	unsigned char ch;
+	GotoXY(10, 10);
+
+
+	ch = getch();
+	cout << (int)ch << endl;
+
+
+	return 0;
+}
+*/
+/*
+///////////////////////////오락을 만들 수 있는 조작법
+#include <iostream>
+#include <windows.h>
+#include <conio.h>
+using namespace std;
+
+#define KEY_LEFT  75    // 좌로
+#define KEY_RIGHT  77    // 우로
+#define KEY_UP    72    // 위로
+#define KEY_DOWN  80    // 아래로
+
+void CursorDel()
+{
+CONSOLE_CURSOR_INFO stCursorInfo = { 1, FALSE };
+SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &stCursorInfo);
+}
+void GotoXY(int iX, int iY)
+{
+COORD stDot = {iX, iY};
+SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), stDot);
+}
+
+int main()
+{
+unsigned char ucKey;
+int iX = 0;
+int iY = 0;
+unsigned char ucObj = '*';
+
+CursorDel();
+GotoXY(iX, iY);
+cout << ucObj;
+
+while (1)
+{
+ucKey = getch();
+//cout << (int)ucKey << endl;
+if (224 == ucKey) // 방향키가 눌려짐
+{
+ucKey = getch();
+GotoXY(iX, iY);
+cout << " ";
+switch (ucKey)
+{
+case KEY_RIGHT:
+if (10 == iX)
+{
+break;
+}
+++iX;
+break;
+case KEY_LEFT:
+--iX;
+break;
+case KEY_DOWN:
+++iY;
+break;
+case KEY_UP:
+if (0 == iY)
+{
+break;
+}
+--iY;
+break;
+}
+GotoXY(iX, iY);
+cout << ucObj;
+}
+
+
+if (27 == ucKey) // 27 : ESC 키
+{
+break;
+}
+
+}
+
+
+
+
+return 0;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class unity
+{
+	int    iNum1;  // unity 클래스 private 멤버
+public:      // public 접근지정자 + 콜론
+	int iNum2;  // unity 클래스 public 멤버
+private:    // private 접근지정자 + 콜론
+	int iNum3;  // unity 클래스 private 멤버
+
+public:
+	void SetiNum1(int iNum)
+	{
+		if (300 < iNum)
+		{
+			iNum = 300;
+		}
+		if (100 > iNum)
+		{
+			iNum = 100;
+		}
+		iNum1 = iNum;
+	}
+	void SetiNum3(int iNum3)
+	{
+		this->iNum3 = iNum3;
+	}
+	int GetiNum1() const
+	{
+		return iNum1;
+	}
+	int GetiNum3() const
+	{
+		return iNum3;
+	}
+};
+
+int main()
+{
+	unity Obj1;
+
+	Obj1.SetiNum1(100);    // Obj1.iNum1 = 100;
+	Obj1.iNum2 = 200;
+	Obj1.SetiNum3(300);    // Obj1.iNum3 = 300;
+	cout << "Obj1.iNum 1 : " << Obj1.GetiNum1() << endl;
+	cout << "Obj1.iNum 2 : " << Obj1.iNum2 << endl;
+	cout << "Obj1.iNum 3 : " << Obj1.GetiNum3() << endl;
+
+	return 0;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class SoSimple
+{
+private:
+	int num;
+public:
+	SoSimple(int n) : num(n)
+	{
+		cout << "num=" << num << ", ";
+		cout << "address=" << this << endl;
+	}
+	void ShowSimpleData()
+	{
+		cout << num << endl;
+	}
+	SoSimple*GetThisPointer()
+	{
+		return this;
+	}
+};
+
+int main(void)
+{
+	SoSimple sim1(100);
+	SoSimple * ptr1 = sim1.GetThisPointer();		//sim1 객체의 주소 값 저장 ptr1=&sim1
+	cout << ptr1 << ",";
+	ptr1->ShowSimpleData();
+
+	SoSimple sim2(200);
+	SoSimple * ptr2 = sim2.GetThisPointer();		//sim2 객체의 주소 값 저장
+	cout << ptr2 << ",";
+	ptr2->ShowSimpleData();
+	return 0;
+}*/
+
+#include <iostream>
+using namespace std;
+
+class TwoNumber
+{
+private:
+	int num1;
+	int num2;
+public:
+	TwoNumber(int num1, int num2)
+	{
+		this->num1 = num1;
+		this->num2 = num2;
+	}
+	/*
+	TwoNumber(int num1, int num2)
+	:this->num1(num1),this->num2(num2)
+	{
+	//empty
+	}
+	*/
+	void ShowTwoNumber()
+	{
+		cout << this->num1 << endl;
+		cout << this->num2 << endl;
+	}
+};
+
+int main(void)
+{
+	TwoNumber two(2, 4);
+	two.ShowTwoNumber();
+	cout<<sizeof(TwoNumber)<<' '<<"\n";
+	cout<<sizeof(two)<<' '<<"\n";
+	return 0;
+}
