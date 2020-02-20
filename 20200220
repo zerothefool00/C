@@ -1,0 +1,652 @@
+/*
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+//Person
+class Person
+{
+private:
+	char * Name;
+	char * Job;
+public:
+	Person(char * Name)
+	{
+		Init(Name, "무직");
+	}
+	Person(char*Name , char * Job)
+	{
+		Init(Name, Job);
+	}
+private:
+	void Init(char*Name, char * Job)
+	{
+		int iLen = strlen(Name) + 1;
+		this->Name = new char[iLen];
+		strcpy_s(this->Name, iLen, Name);
+
+		iLen = strlen(Job) + 1;
+		this->Job = new char[iLen];
+		strcpy_s(this->Job, iLen, Job);
+	}
+	void Print()
+	{
+		cout << "이름 : " << Name << endl;
+		cout << "직업 : " << Job << endl;
+	}
+	~Person()
+	{
+		delete[] Name;
+		delete[] Job;
+	}
+
+private:
+
+};
+
+//Professor
+class Professor :public Person
+{
+public:
+	Professor(char * Name)
+		: Person (Name,"교수")
+	{
+	}
+
+	~Professor()
+	{
+	}
+
+private:
+
+
+};
+
+
+//Engineer
+class Engineer :public Person
+{
+public:
+	Engineer(char * Name)
+		: Person(Name,"기술자")
+	{
+	}
+	~Engineer()
+	{}
+
+private:
+
+};
+
+//Student
+class Student :public Person
+{
+public: 
+	Student(char * Name)
+		:Person(Name,"학생")
+	{
+
+	}
+	~Student()
+	{}
+
+private:
+
+};
+
+int main(void)
+{
+	Student ObjStudent("홍길동");
+	Student ObjStudent2("가","엔지니어");
+	ObjStudent.Print();
+	ObjStudent2.Print();
+	return 0;
+}
+*/
+/*
+#include <iostream>
+#include <cstring>
+using namespace std;
+// Person
+class Person
+{
+private:
+char * Name;
+char * Job;
+public:
+Person(char *Name)
+{
+Init(Name, "무직");
+}
+Person(char *Name, char *Job)
+{
+Init(Name, Job);
+}
+void Print()
+{
+cout << "이름 : " << Name << endl;
+cout << "직업 : " << Job << endl;
+}
+~Person()
+{
+delete[] Name;
+}
+private:
+void Init(char *Name, char *Job)
+{
+int iLen = strlen(Name) + 1;
+this->Name = new char[iLen];
+strcpy_s(this->Name, iLen, Name);
+
+iLen = strlen(Job) + 1;
+this->Job = new char[iLen];
+strcpy_s(this->Job, iLen, Job);
+}
+};
+
+// Professor
+class Professor : public Person
+{
+public :
+Professor(char * Name)
+: Person(Name, "교수")
+{
+
+}
+~Professor()
+{
+
+}
+};
+// Engineer
+class Engineer : public Person
+{
+public:
+Engineer(char * Name)
+: Person(Name, "기술자")
+{
+
+}
+~Engineer()
+{
+
+}
+};
+// Student
+class Student : public Person
+{
+public:
+Student(char * Name)
+: Person(Name, "학생")
+{
+
+}
+~Student()
+{
+
+}
+};
+
+
+int main()
+{
+Student ObjStudent("홍길동");
+ObjStudent.Print();
+
+return 0;
+}*/
+
+/*
+#include<iostream>
+using namespace std;
+
+class Base
+{
+private:
+	int num1;
+protected:
+	int num2;
+public:
+	int num3;
+
+	Base() : num1(1), num2(2), num3(3)
+	{}
+};
+
+class Derived : protected Base {};	//empty!
+
+int main(void)
+{
+	Derived drv;
+	cout << drv.num3 << endl;		//컴파일 에러발생!
+	return 0;
+}
+
+*/
+/*주수홍강사님, [20.02.20 11:50]
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class AAA
+{
+  public:
+    int A;
+};
+class BBB : public AAA
+{
+  public:  // 외부 접근 권한
+    int B;
+    void test()
+    {
+      A = 100;  // class AAA 내부
+      B = 200;  // class BBB 내부
+    }
+};
+int main(void)
+{
+  BBB BObj;
+  BObj.A = 100;
+  BObj.B = 100;
+  BObj.test();
+
+  return 0;
+}
+
+주수홍강사님, [20.02.20 11:52]
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class AAA
+{
+  public:
+    int A;
+};
+
+class CCC : private AAA
+{
+  public:  // 외부 접근 권한
+    int C;
+    void test()
+    {
+      A = 100;  // class AAA 내부
+      C = 200;  // class CCC 내부
+    }
+};
+int main(void)
+{
+  CCC CObj;
+  CObj.A = 100;
+  CObj.C = 100;
+  CObj.test();
+
+  return 0;
+}
+
+class BBB : public AAA
+{
+public:  // 외부 접근 권한
+  int B;
+  void test()
+  {
+    A = 100;  // class AAA 내부
+    B = 200;  // class BBB 내부
+  }
+};
+*/
+//어디서 걸리는 가가 다름.
+
+/*
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class AAA
+{
+public:
+	int A;
+};
+class BBB : public AAA
+{
+public:  // 외부 접근 권한
+	int B;
+	void test()
+	{
+		A = 100;  // class AAA 내부
+		B = 200;  // class BBB 내부
+	}
+};
+int main(void)
+{
+	BBB BObj;
+	BObj.A = 100;
+	BObj.B = 100;
+	BObj.test();
+
+	return 0;
+}
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class AAA
+{
+	public:
+		int A;
+};
+
+class CCC : private AAA
+{
+	public:  // 외부 접근 권한
+	int C;
+		void test()
+		{
+			A = 100;  // class AAA 내부
+			C = 200;  // class CCC 내부
+		}
+};
+int main(void)
+{
+	CCC CObj;
+	CObj.A = 100;
+	CObj.C = 100;
+	CObj.test();
+
+	return 0;
+}
+
+class BBB : public AAA
+{
+	public:  // 외부 접근 권한
+	int B;
+	void test()
+	{
+		A = 100;  // class AAA 내부
+		B = 200;  // class BBB 내부
+	}
+};
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class AAA
+{
+	public:    // 외부 접근 가능
+		int A;
+	private:  // 외부 접근 거부
+		int iNum;
+	protected:  // 상속한 외부 클래스만 접근 가능
+		int iPro;
+};
+
+class CCC : private AAA
+{
+	public:  // 외부 접근 가능
+		int C;
+	void test()
+	{
+		A = 100;  // class AAA 내부 public 멤버에 접근
+		C = 200;  // class CCC 내부
+		//iNum = 300;  // class AAA 내부 private 멤버에 접근
+		iPro = 400;    // class AAA 내부 protected 멤버에 접근
+	}
+};
+
+class BBB : public AAA
+{
+	public:  // 외부 접근 권한
+		int B;
+	void test()
+	{
+		A = 100;    // class AAA 내부
+		B = 200;    // class BBB 내부
+		// iNum = 300;  // class AAA 내부 private 멤버에 접근
+		iPro = 400;    // class AAA 내부 protected 멤버에 접근
+	}
+};
+
+int main(void)
+{
+	BBB BObj;
+	BObj.A = 100;  // public AAA에 의해 부모 클래스는 접근 가능
+	BObj.B = 100;
+	// BObj.iPro = 100;// AAA의 protected 필드에 의해 main에서 접근 불가
+	BObj.test();
+
+	CCC CObj;
+	// CObj.A = 100;  // private AAA에 의해 부모 클래스는 접근 불가
+	CObj.C = 100;
+	// CObj.iPro = 100; // private AAA에 의해 부모 클래스는 접근 불가
+	CObj.test();
+
+	return 0;
+}
+
+ 
+  */
+/*
+#include <iostream>
+using namespace std;
+
+class Person
+{
+public:
+	void Sleep() { cout << "Sleep" << endl; }
+};
+
+class Student : public Person
+{
+public:
+	void Study() { cout << "Study" << endl; }
+};
+
+class PartTimeStudent : public Student
+{
+public:
+	void Work() { cout << "Work" << endl; }
+
+};
+
+int main(void)
+{
+	Person * ptr1 = new Student();
+	Person * ptr2 = new PartTimeStudent();
+	Student * ptr3 = new PartTimeStudent();
+	ptr1->Sleep();
+	ptr2->Sleep();
+	ptr3->Study();
+	delete ptr1; 
+	delete ptr2;
+	delete ptr3;
+	return 0;
+}
+*/
+
+/*
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class AAA
+{
+public:
+	void print()
+	{
+		cout << "저는 AAA클라스입니다.\n";
+	}
+};
+
+class CCC : public AAA
+{
+public:
+	void print()	//override
+	{
+		cout << "저는 CCC클라스입니다.\n";
+	}
+};
+
+class BBB : public AAA
+{
+public:
+	void print()
+	{
+		cout << "저는 BBB클라스입니다.\n";
+	}
+};
+
+int main(void)
+{
+	AAA AObj;
+	AObj.print();
+	BBB BObj;
+	BObj.print();
+	CCC CObj;
+	CObj.print();
+
+	AAA*Pointer;
+	Pointer = &AObj;
+	Pointer->print();
+	Pointer = &BObj;
+	Pointer->print();
+	Pointer = &CObj;
+	Pointer->print();
+
+	AAA*APointer  = &AObj;
+	BBB*BPointer = APointer;
+	CCC*CPointer = BPointer;
+	
+	
+	return 0;
+}*/
+/*
+#include <iostream>
+using namespace std;
+
+class First
+{
+public:
+	void MyFunc() { cout << "FirstFunc" << endl; }
+};
+
+class Second : public First
+{
+public:
+	void MyFunc() { cout << "SecondFunc" << endl; }
+};
+
+class Third : public Second
+{
+public:
+	void MyFunc() { cout << "ThirdFunc" << endl; }
+};
+
+int main(void)
+{
+	Third * tptr = new Third();
+	Second * sptr = tptr;
+	First * fptr = sptr;
+
+	fptr->MyFunc();
+	sptr->MyFunc();
+	tptr->MyFunc();
+	delete tptr;
+	return 0;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class First
+{
+public:
+	virtual void MyFunc() { cout << "FirstFunc" << endl; }
+};
+
+class Second : public First
+{
+public:
+	virtual void MyFunc() { cout << "SecondFunc" << endl; }
+};
+
+class Third : public Second
+{
+public:
+	virtual void MyFunc() { cout << "ThirdFunc" << endl; }
+};
+
+int main(void)
+{
+	Third * tptr = new Third();
+	Second * sptr = tptr;
+	First * fptr = sptr;
+
+	fptr->MyFunc();
+	sptr->MyFunc();
+	tptr->MyFunc();
+	delete tptr;
+	return 0;
+}
+*/
+
+#include <iostream>
+using namespace std;
+
+class shape
+{
+public:
+	int iX;
+	int iY;
+public:
+	shape()
+	{
+		iX=0;
+		iY=0;
+	}
+	shape(int iX, int iY)
+	{
+		this->iX = iX;
+		this->iY = iY;
+	}
+public:
+	void Draw()
+	{
+		cout << "[shape] X: " << iX << ",Y: " << iY << endl;
+	}
+};
+
+class Rectangle : public shape
+{
+public:
+	int iHeight;
+	int iWidth;
+public:
+	Rectangle()
+	{
+		iHeight = 0;
+		iWidth = 0;
+	}
+	Rectangle(int iX, int iY, int iHeight, int iWidth)
+		: shape(iX, iY)
+	{
+		this->iHeight = iHeight;
+		this->iWidth = iWidth;
+	}
+public:
+	void Draw()
+	{
+		cout << "[Rectangle] X:" << iX << ", Y: " << iY << ", Area : " << iHeight*iWidth << endl;
+	}
+};
+
+int main(void)
+{
+	shape ObjShape;
+	Rectangle ObjRectangle;
+	ObjShape.Draw();
+	ObjRectangle.Draw();
+	return 0;
+}
