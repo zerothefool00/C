@@ -1,0 +1,262 @@
+/*
+#include <iostream>
+using namespace std;
+
+class Point
+{
+private:
+	int xpos, ypos;
+public:
+	Point(int x = 0, int y = 0) : xpos(x), ypos(y)
+	{
+		cout << "생성자동작\n";
+	}
+	void ShowPosition() const
+	{
+		cout << '[' << xpos << "," << ypos << ']' << endl;
+	}
+	Point & operator++()
+	{
+		//cout<<"++연산자동작\n";
+		xpos += 1;
+		ypos += 1;
+		return *this;
+	}
+	friend Point& operator--(Point &ref);
+};
+
+Point& operator--(Point &ref)
+{
+	//cout<<"--연산자동작\n";
+	ref.xpos -= 1;
+	ref.ypos -= 1;
+	return ref;
+}
+
+int main(void)
+{
+	Point pos(1, 2);
+	//++pos;//operator++()
+	pos.operator++();
+	pos.ShowPosition();
+	//--pos;//operator--(Point& Ref)
+	operator--(pos);
+	pos.ShowPosition();
+
+	++(++pos);
+	pos.ShowPosition();
+	--(--pos);
+	pos.ShowPosition();
+	return 0;
+
+
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Point
+{
+private:
+	int xpos;  int ypos;
+public:
+	Point(int x = 0, int y = 0) : xpos(x), ypos(y)
+	{
+		cout << "생성자 동작\n";
+	}
+	Point(Point& copy)
+	{
+		cout << "복사 생성자 동작\n";
+	}
+	~Point()
+	{
+		cout << "소멸자 동작\n";
+	}
+	void ShowPosition() const
+	{
+		cout << '[' << xpos << ", " << ypos << ']' << endl;
+	}
+	// Point operator++()
+	Point& operator++()
+	{
+		cout << "++ 연산자 동작\n";
+		xpos = xpos + 1;
+		ypos = ypos + 1;
+		cout << "++ 연산자 동작 완료\n";
+		return *this;
+	}
+};
+
+int main()
+{
+	Point pos(1, 2);
+	(++(++pos)).ShowPosition();
+	pos.ShowPosition();
+
+
+	return 0;
+}
+*/
+/*
+#include <iostream> 
+using namespace std;
+
+class Point
+{
+private:
+	int xpos;
+	int ypos;
+public:
+	Point(int x = 0, int y = 0) : xpos(x), ypos(y)
+	{
+
+	}
+	void Showposition()const
+	{
+		cout << '[' << xpos << "," << ypos<<']'<<endl;
+	}
+	Point& operator++()	//전위증가
+	{
+		xpos += 1;
+			ypos += 1;
+			return *this;
+	}
+	const Point operator++(int)	//후위증가
+	{
+		const Point retobj(xpos, ypos);	//const point retobj(*this);
+		xpos += 1;
+		ypos += 1;
+		return retobj;
+	}
+	friend Point& operator--(Point &ref);
+	friend const Point operator--(Point &ref, int);
+	};
+
+Point& operator--(Point &ref)	//전위감소
+{
+	ref.xpos -= 1;
+	ref.ypos -= 1;
+	return ref;
+}
+
+const Point operator--(Point & ref, int)	//후위감소
+{
+	const Point retobj(ref); //const 객체라한다.
+	ref.xpos -= 1;
+	ref.ypos -= 1;
+	return retobj;
+}
+
+int main(void)
+{
+	Point pos(3, 5);
+	cpy = po3*2
+	Point cpy;
+	cpy = pos--;
+	cpy.Showposition();
+	pos.Showposition();
+
+	cpy = pos++;
+	cpy.Showposition();
+	pos.Showposition();
+	return 0;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Point
+{
+	private:
+		int xpos, ypos;
+	public:
+	Point(int x = 0, int y = 0) : xpos(x), ypos(y)
+	{}
+	void ShowPosition() const
+	{
+		cout << '[' << xpos << "," << ypos << ']' << endl;
+	}
+	Point operator* (int times)
+	{
+		Point pos(xpos*times, ypos*times);
+		return pos;
+	}
+	friend Point operator*(int times, Point&ref);
+};
+
+Point operator * (int times,Point &ref)
+{
+	return ref*times;
+}
+
+int main(void)
+{
+	Point pos(1, 2);
+		Point cpy;
+
+	cpy = 3 * pos;
+	cpy.ShowPosition()
+		;
+	cpy = 2 * pos * 3;
+	cpy.ShowPosition();
+	return 0;
+}
+*/
+#include <iostream>
+namespace mystd
+{
+	using namespace std;
+
+	class ostream
+	{
+		public: void operator<<(char * str)
+		{
+		printf("1[%s]", str);
+		}
+		void operator<< (char str)
+		{
+			printf("%c", str);
+		}
+		void operator<<(int num)
+		{
+			printf("3[%d]", num);
+		}
+		void operator<<(double e)
+		{
+			printf("2[%g]", e);
+		}
+		void operator<< (ostream& (*fp)(ostream & ostm))
+		{
+			printf("##");
+			fp(*this);
+		}
+	};
+
+	ostream& endl(ostream &ostm)
+	{
+		ostm << '=';
+		ostm << '=';
+		ostm << '\n';
+		fflush(stdout);
+		return ostm;
+	}
+
+	ostream cout;
+}
+
+int main(void)
+{
+	using mystd::cout;
+	using mystd::endl;
+
+	cout << "Simple String";
+	cout << endl;
+	cout << 3.14;
+	cout << endl;
+	cout << 123;
+	endl(cout);
+
+	return 0;
+}
