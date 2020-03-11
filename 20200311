@@ -1,0 +1,227 @@
+#include "ustring.h"
+
+String::String()
+{
+	cout << "디폴트 생성자 호출\n";
+	len = 0;
+	str = NULL;
+}
+
+String::String(const char* s)
+{
+	cout << "생성자 String(const char* s) 호출\n";
+	len = strlen(s) + 1;
+	str = new char[len];
+	strcpy(str, s);
+}
+
+String::String(const String& s)
+{
+	cout << "복사 생성자 호출\n";
+	len = s.len;
+	str = new char[len];
+	strcpy(str, s.str);
+}
+
+String::~String()
+{
+	if (str != NULL)
+		delete[]str;
+}
+
+String& String::operator= (const String& s)
+{
+	cout << "대입 연산자 호출\n";
+	if (str != NULL)
+		delete[]str;
+	len = s.len;
+	str = new char[len];
+	strcpy(str, s.str);
+	return *this;
+}
+
+String& String::operator+= (const String& s)
+{
+	len += (s.len - 1);
+	char* tempstr = new char[len];
+	strcpy(tempstr, str);
+	strcat(tempstr, s.str);
+
+	if (str != NULL)
+		delete[]str;
+	str = tempstr;
+	return *this;
+}
+
+bool String::operator== (const String& s)
+{
+	return strcmp(str, s.str) ? false : true;
+}
+
+String String::operator+ (const String& s)
+{
+	char* tempstr = new char[len + s.len - 1];
+	strcpy(tempstr, str);
+	strcat(tempstr, s.str);
+
+	String temp(tempstr);
+	delete[]tempstr;
+	return temp;
+}
+
+ostream& operator<< (ostream& os, const String& s)
+{
+	os << s.str;
+	return os;
+}
+
+istream& operator>> (istream& is, String& s)
+{
+	char str[100];
+	is >> str;
+	s = String(str);
+	return is;
+}
+
+
+/*
+#include <iostream>
+
+using namespace std;
+
+
+int Add(int Num1, int Num2)
+{
+	return Num1 + Num2;
+}
+double Add(double Num1, double Num2)
+{
+	return Num1 + Num2;
+}
+
+int main()
+{
+	cout << Add(3, 5) << endl;
+	cout << Add(3.14, 2.16) << endl;
+	return 0;
+}
+*/
+
+/*
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+template <typename T>
+T Add(T Num1, T Num2)
+{
+	return Num1 + Num2;
+}
+
+int main()
+{
+	cout << Add<int>(3, 5) << endl;
+	cout << Add<double>(3.14, 2.16) << endl;
+	string Obj1 = "1111";
+	string Obj2 = "2222";
+	cout << Add<string>(Obj1, Obj2) << endl;
+	return 0;
+}
+
+*/
+/*
+#include <iostream>
+using namespace std;
+
+template <class T1, class T2>
+void ShowData(double num)
+{
+	cout << (T1)num << ", " << (T2)num << endl;
+}
+
+int main(void)
+{
+	ShowData<char, int>(65);
+	ShowData<char, int>(67);
+	ShowData<char, double>(68.9);
+	ShowData<short, double>(69.2);
+	ShowData<short, double>(70.4);
+	return 0;
+}
+*/
+/*
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+template <typename T>
+T Max(T a, T b)
+{
+	return a > b ? a : b;
+}
+
+template <>
+char* Max(char* a, char*b)
+{
+	cout << "char* Max<char*>(char* a, char* b)" << endl;
+	return strlen(a) > strlen(b) ? a : b;
+}
+
+template <>
+const char* Max(const char* a,const char*b)
+{
+	cout << "const char* Max<const char*>(const char* a,const char* b)" << endl;
+	return strcmp(a,b)>0  ? a : b;
+}
+
+int main(void)
+{
+	cout << Max(11, 15) << endl;
+	cout << Max('T', 'Q') << endl;
+	cout << Max(3.5, 7.5) << endl;
+	cout << Max("Simple","Best") << endl;
+
+	char str1[] = "Simple";
+	char str2[] = "Best";
+	cout << Max(str1, str2) << endl;
+	return 0;
+}
+*/
+
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class Point
+{
+	private:
+		T xpos;
+		T ypos;
+	public:
+		Point(T x = 0, T y = 0);
+		void ShowPosition() const;
+};
+
+template <typename T>
+Point<T>::Point(T x = 0, T y = 0) : xpos(x), ypos(y)
+{
+}
+
+template <typename T>
+void Point<T>::ShowPosition() const
+{
+	cout << '[' << xpos << ", " << ypos << ']' << endl;
+}
+int main(void)
+{
+	Point<int> pos1(3, 4);
+	pos1.ShowPosition();
+
+	Point<double> pos2(2.4, 3.6);
+	pos2.ShowPosition();
+
+	Point<char> pos3('P', 'F');	//좌표 정보를 문자로 표시하는 상황의 표현
+	pos3.ShowPosition();
+	return 0;
+}
