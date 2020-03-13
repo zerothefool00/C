@@ -1,0 +1,294 @@
+/*
+#include <iostream>
+#include <new>
+using namespace std;
+
+int main(void)
+{
+	int num = 0;
+
+	try
+	{
+		while (1)
+		{
+			num++;
+			cout << num << "번째 할당 시도" << endl;
+			new int[10000][10000];
+		}
+	}
+	catch (bad_alloc & bad)
+	{
+		cout << bad.what() << endl;
+		cout << "더 이상 할당 불가!" << endl;
+	}
+	return 0;
+}
+*/
+/*#include <iostream>
+using namespace std;
+
+class Car
+{
+  private:
+    int fuelGauge;
+  public:
+    Car(int fuel) : fuelGauge(fuel)
+    {
+
+    }
+    void ShowCarState() {
+      cout << "잔여 연료량: " << fuelGauge << endl;
+    }
+};
+
+
+class Truck : public Car
+{
+  private:
+    int freightWeight;
+  public:
+    Truck(int fuel, int weight)
+      : Car(fuel), freightWeight(weight)
+    {
+
+    }
+    void ShowTruckState()
+    {
+      ShowCarState();
+      cout << "화물의 무게: " << freightWeight << endl;
+    }
+};
+
+int main(void)
+{
+  Car * pcar1 = new Truck(80, 200);
+  Truck * ptruck1 = (Truck *)pcar1;  //문제 없어 보이는 형 변환!
+  ptruck1->ShowTruckState();
+  cout << endl;
+  Car * pcar2 = new Car(120);
+  Truck * ptruck2 = (Truck*)pcar2;  //문제가 바로 보이는 형 변환!
+  ptruck2->ShowTruckState();
+  return 0;
+}*/
+
+/*
+#include <iostream>
+using namespace std;
+
+class Car
+{
+	private:
+		int fuelGauge;
+	public:
+		Car(int fuel) : fuelGauge(fuel)
+		{
+
+		}
+		void ShowCarState() {
+			cout << "잔여 연료량: " << fuelGauge << endl;
+		}
+};
+
+
+class Truck : public Car
+{
+	private:
+		int freightWeight;
+	public:
+		Truck(int fuel, int weight)
+			: Car(fuel), freightWeight(weight)
+		{
+
+		}
+		void ShowTruckState()
+		{
+			ShowCarState();
+			cout << "화물의 무게: " << freightWeight << endl;
+		}
+};
+
+int main(void)
+{
+	Car * pcar1 = new Truck(80, 200);
+	Truck * ptruck1 =dynamic_cast<Truck *>(pcar1);	//컴파일 에러
+
+	ptruck1->ShowTruckState();
+	cout << endl;
+	Car * pcar2 = new Car(120);
+	Truck * ptruck2 =dynamic_cast< Truck*>(pcar2);	//컴파일 에러
+
+	Truck * ptruck3 = new Truck(70, 150);
+	Car * pcar3 = dynamic_cast<Car*>(ptruck3);	//컴파일 OK!
+	return 0;
+
+	Car * pcar1 = new Truck(80, 200);
+	Truck * ptruck1 = static_cast<Truck *>(pcar1);
+
+	ptruck1->ShowTruckState();
+	cout << endl;
+	Car * pcar2 = new Car(120);
+	Truck * ptruck2 = static_cast< Truck*>(pcar2);
+}
+
+*/
+/*
+#include <iostream>
+using namespace std;
+
+void ShowString(char* str)
+{
+	cout << str << endl;
+}
+
+void ShowAddResult(int& n1, int& n2)
+{
+	cout << n1 + n2 << endl;
+}
+
+int main(void)
+{
+	const char * name = "Lee Sung Ju";
+	ShowString(const_cast<char*>(name));
+
+	const int& num1 = 100;
+	const int& num2 = 200;
+	ShowAddResult(const_cast<int&>(num1), const_cast<int&>(num2));
+	return 0;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+int main(void)
+{
+	int num = 0X010203;
+	char * ptr = reinterpret_cast<char*>(&num);
+
+	for (int i = 0; i < sizeof(num); i++)
+		cout << static_cast<int>(*(ptr + i)) << endl;
+	return 0;
+}
+*/
+/*
+#include <iostream>
+#include <iomanip> //스트림 조작기(stream manipulators)
+using namespace std;
+
+int main()
+{
+	int num = 2012;
+
+	double d_num1 = 10;
+	double d_num2 = 12.345;
+
+
+	cout << "그냥 출력" << endl;
+	cout << "10진수 num = " << num << endl;
+	cout << "16진수 num = " << hex << num << endl;
+	cout << " 8진수 num = " << oct << num << endl;
+	cout << dec;
+	cout << "d_num1 = " << d_num1 << endl;
+	cout << "d_num2 = " << d_num2 << endl << endl;
+
+	cout << "부호 표시" << endl;
+	cout.setf(ios::showpos);
+	cout << "num = " << num << endl;
+	cout << "d_num1 = " << d_num1 << endl;
+	cout << "d_num2 = " << d_num2 << endl << endl;
+
+	cout << "접두어(0,0x) 표시 " << endl;
+	cout.setf(ios::showbase);
+	cout << "접두어 표시 10진수 num = " << num << endl;
+	cout << "접두어 표시 16진수 num = " << hex << num << endl;
+	cout << "접두어 표시  8진수 num = " << oct << num << endl << endl;
+
+	cout << "16진수 대문자 표시 " << endl;
+	cout.setf(ios::uppercase);
+	cout << "접두어 표시 10진수 num = " << dec << num << endl;
+	cout << "접두어 표시 16진수 num = " << hex << num << endl;
+	cout << "접두어 표시  8진수 num = " << oct << num << endl << endl;
+
+	cout << "소수점 생략 안함 " << endl;
+	cout.setf(ios::showpoint);
+	cout << "소수점 생략 안하는 num = " << num << endl;
+	cout << "소수점 생략 안하는 d_num1 = " << d_num1 << endl;
+	cout << "소수점 생략 안하는 d_num2 = " << d_num2 << endl << endl;
+
+	return 0;
+}
+ */
+
+/*
+#include <iostream>
+using namespace std;
+
+class SoSimple	//Polymorphic 클래스! ShowSimpleInfo가 가상함수이므로 
+{
+public:
+	virtual void ShowSimpleInfo()
+	{
+		cout << "SoSimple Base Class" << endl;
+	}
+};
+
+class SoComplex : public SoSimple
+{
+public:
+	void ShowSimpleInfo()	//이것 역시 가상 함수!
+	{
+		cout << "SoComplex Derived Class" << endl;
+	}
+};
+
+int main(void)
+{
+	/*SoSimple * simPtr = new SoComplex;			//부모 객체가 자식 객체 안에 들어가 있어서 부모객체 포인터가 자식객체를 가르킬 수 있는 경우  (카메라 2번경우)
+	SoComplex * comPtr = dynamic_cast<SoComplex*>(simPtr);
+	comPtr->ShowSimpleInfo();*/
+/*
+	SoSimple * simPtr = new SoSimple;				//부모 객체가 자식 객체 안에 들어가 있지 않아서 부모객체 포인터가 자식객체를 가르킬 수 없는 경우( 카메라 1번 경우)
+	SoComplex * comPtr = dynamic_cast<SoComplex*>(simPtr);
+	cout << "comPtr: " << comPtr << endl;
+	cout << "simPtr: " << simPtr << endl;			//다이내믹 캐스트는 이렇게 0으로 표시를 해주니 불량처리? 같은 걸 할 수 있지 않을까? 646page
+	return 0;
+}
+*/
+
+#include <iostream>
+using namespace std;
+
+class SoSimple
+{
+public:
+	virtual void ShowSimpleInfo()
+	{
+		cout << "SoSimple Base Class" << endl;
+	}
+};
+
+class SoComplex : public SoSimple
+{
+public:
+	void ShowSimpleInfo()
+	{
+		cout << "SoComplex Derived Class" << endl;
+	}
+};
+
+int main(void)
+{
+	SoSimple simObj;
+	SoSimple& ref = simObj;
+
+	try
+	{
+		SoComplex& comRef = dynamic_cast<SoComplex&>(ref);
+		comRef.ShowSimpleInfo();
+	}
+	catch (bad_cast expt)
+	{
+		cout << expt.what() << endl;
+	}
+	return 0;
+}
